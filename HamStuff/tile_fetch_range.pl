@@ -55,8 +55,9 @@ print "  Ending Coords: $xend, $yend at Zoom $ARGV[4]\n\n";
 mkdir $ARGV[4];
 
 for (my $i=$xstart ; $i <= $xend ; $i++ ) {
-	mkdir "$ARGV[4]/$i" ;
 	$dir = "$ARGV[4]/$i" ; 
+	mkdir "$dir" ;
+	
 	for (my $j=$ystart ; $j <= $yend ; $j++) {
 		my $url = "$hostname/$ARGV[4]/$i/$j.png" ;
 		my $filename = $url;
@@ -71,5 +72,4 @@ for (my $i=$xstart ; $i <= $xend ; $i++ ) {
 		getstore($url,$save);
 		print " Done\n";
 	}
-#	print "$i\n"
 }
