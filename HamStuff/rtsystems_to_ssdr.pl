@@ -12,7 +12,7 @@ my $date = strftime "%Y-%m-%d_%H-%M-%S", localtime;
 my $opt_string = 'hf:o:g:';
 getopts( "$opt_string", \%opt);
 
-print "\nFlex 6000 Series RT Systems To SmartSDR CSV Memory Converter v0.2\n(C)2014 Chris Johnson K6OZY k6ozy[at]arrl.net\n";
+print "\nFlex 6000 Series RT Systems To SmartSDR CSV Memory Converter v1.0\n(C)2014 Chris Johnson K6OZY k6ozy[at]arrl.net\n";
 
 usage() if $opt{h};
 
@@ -72,7 +72,7 @@ while ($line = <$data>) {
 close $data;
 print "$rows lines consumed.\n";
 
-		print $ssdr_data "NA,OWNER,GROUP,FREQ,NAME,MODE,STEP,OFFSET_DIRECTION,REPEATER_OFFSET,TONE_MODE,TONE_VALUE,RF_POWER,RX_FILTER_LOW,RX_FILTER_HIGH,HIGHLIGHT,HIGHLIGHT_COLOR\r\n";
+		print $ssdr_data "NA,OWNER,GROUP,FREQ,NAME,MODE,STEP,OFFSET_DIRECTION,REPEATER_OFFSET,TONE_MODE,TONE_VALUE,RF_POWER,RX_FILTER_LOW,RX_FILTER_HIGH,HIGHLIGHT,HIGHLIGHT_COLOR,SQUELCH,SQUELCH_LEVEL\r\n";
 
 
 foreach my $row (@fields) {;
@@ -111,7 +111,7 @@ foreach my $row (@fields) {;
 		#Munge Tone Value
 		$tone_value = @$row[8] + 0 ;
 
-		print $ssdr_data "MEMORY,$owner,$group,@$row[1],@$row[6],FM,100,$offset_direction,$repeater_offset,$tone_mode,$tone_value,100,-10000,10000,0,0\r\n";
+		print $ssdr_data "MEMORY,$owner,$group,@$row[1],@$row[6],FM,100,$offset_direction,$repeater_offset,$tone_mode,$tone_value,100,-10000,10000,0,0,1,20\r\n";
 		
 	}
 }
